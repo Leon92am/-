@@ -1,7 +1,7 @@
 #coding:utf-8
 #以升序为例
 def maopaoSORT(array):
-    for i in range(len(array)-1-1,-1,-1):#每次不需要对后面的元素进行比较，因为一趟排序下来，最后的元素一定是最大的
+    for i in range(len(array)-1,-1,-1):#每次不需要对后面的元素进行比较，因为一趟排序下来，最后的元素一定是最大的
         swap=0
         for j in range(i):
             if array[j]>array[j+1]:
