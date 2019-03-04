@@ -11,11 +11,11 @@ def max_heapify(heap,heapsize,root):
         larger=rightchild
     if larger!=root:
         heap[larger],heap[root]=heap[root],heap[larger]
-        max_heapify(heap,heapsize,larger)
+        max_heapify(heap,heapsize,larger)#自顶向下调整
 
 def build_heap(heap):#构造大根堆
     heapsize=len(heap)
-    for i in range((heapsize-2)//2,-1,-1):
+    for i in range((heapsize-2)//2,-1,-1):#自底向上调整大根堆
         max_heapify(heap,heapsize, i)
     return heap
 
@@ -29,9 +29,7 @@ def heapsort(heap):#交换前后的值
 a=heapsort([30,50,57,77,62,78,94,80,84])
 print a
 
-
-
-
+#核心思想，在一开始是自底向上构造大根堆build_heapify，然后交换首末值，再自顶向下构造调整大根堆即max_heapify
 
 
 
