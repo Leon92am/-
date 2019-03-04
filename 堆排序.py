@@ -15,13 +15,13 @@ def max_heapify(heap,heapsize,root):
 
 def build_heap(heap):#构造大根堆
     heapsize=len(heap)
-    for i in range((heapsize-2)//2,-1-1):
+    for i in range((heapsize-2)//2,-1,-1):
         max_heapify(heap,heapsize, i)
     return heap
 
 def heapsort(heap):#交换前后的值
     build_heap(heap)
-    for i in range(len(heap)-1,-1-1):
+    for i in range(len(heap)-1,-1,-1):
         heap[0],heap[i]=heap[i],heap[0]
         max_heapify(heap, i, 0)
     return heap
