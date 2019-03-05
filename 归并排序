@@ -1,0 +1,29 @@
+#coding:utf-8
+#归并排序,以升序为例
+def MergeSort(myList):#核心是递归，但是递归过程中有合并，所以边递归拆分边合并，理解这个思想
+
+    if len(myList)==1:
+        return myList
+    mid = len(myList) // 2
+    beforpart=myList[:mid]
+    Ll=MergeSort(beforpart)
+    afterpart=myList[mid:]
+    Rl=MergeSort(afterpart)
+    return merge(Ll,Rl)
+
+def merge(left,right):
+#合并思想的核心是分别拿出两个列表中最小的数比较，把较小的放入result，然后必有一个空，将另一个非空列表直接加上即可
+    result = []
+    while len(left)>0 and len(right)>0:
+        if left[0]<=right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    result+=left
+    result+=right
+    return result
+
+if __name__=="__main__":
+    test=[352,43,756,1,6]
+    out=MergeSort(test)
+    print out
