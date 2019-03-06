@@ -1,0 +1,71 @@
+#coding:utf-8
+#注意这里构建的时完全二叉树
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.childl = None
+        self.childr = None
+
+
+class Tree:
+    def __init__(self):
+        self.root = None
+    def add(self, data):
+        node = Node(data)
+        #print node.data
+
+        if self.root is None:#如果树是空的，则对根节点赋值
+            self.root = node
+        else:
+            q=[self.root]  # 在队列q第一个位置加入左右子树没有满的根节点,然后开始添加左右子树，注意每一次添加新节点都是重新开始构建的，所以q的都是从根节点开始创建
+            while True:
+                pop_node = q.pop(0)# 其中q表是目前左右子树没有满的节点，且每次从根节点开始取，左右子树满了之后将该根节点删除。例如到了add(3)的时候q是【0】,做完第2个while循环后为【0，1,2】，继续下一个循环，继续循环，pop出1，将1的左孩子定义为3
+                #print pop_node.data
+                if pop_node.childl is None:
+                    pop_node.childl = node
+                    return
+                elif pop_node.childr is None:
+                    pop_node.childr = node
+                    return
+                else: # 如果左右子树都不为空，往判断列表加入子树，循环进行子树的判断
+                    q.append(pop_node.childl)
+                    q.append(pop_node.childr)
+                    print "完成一颗二叉树"
+
+    def preorder(self,root):  # 先序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left_data = self.preorder(root.childl)
+        right_data = self.preorder(root.childr)
+        return result + left_data + right_data
+
+    def inorder(self, root):  # 中序序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left_data = self.inorder(root.childl)
+        right_data = self.inorder(root.childr)
+        return left_data + result + right_data
+
+    def postorder(self, root):  # 后序遍历
+        if root is None:
+            return []
+        result = [root.data]
+        left_data = self.postorder(root.childl)
+        right_data = self.postorder(root.childr)
+        return left_data + right_data + result
+
+
+t = Tree()
+for i in range(10):
+    t.add(i)
+#print('层序遍历:', t.traverse())
+
+print('先序遍历:', t.preorder(t.root))
+print('中序遍历:', t.inorder(t.root))
+print('后序遍历:', t.postorder(t.root))
+
+#二叉树构建的核心思想是利用python中的列表可以实现队列，先进先出。在构造完全二叉树时每次给树添加节点时都是从根节点开始添加进列表，然后添加左右孩子，添加完后删除父节点，对排在列表前面的节点继续添加左右孩子。
+二叉树的查找思想则是递归
+
